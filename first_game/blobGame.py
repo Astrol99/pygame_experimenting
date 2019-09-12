@@ -13,3 +13,14 @@ width = 40
 height = 60 
 
 vel = 5     # Velocity of object moving
+
+run = True
+while run:
+    pygame.time.delay(100) # Make things run a bit slower so it doesn't run too fast (in miliseconds)
+
+    # Gets all event that pygame gets from user
+    for event in pygame.event.get(): 
+        if event.type == pygame.QUIT:   # If user clicks on exit button (top right of window), makes run
+            run = False                 # false and stops loop, eventually running pygame.quit() which is outside of loop
+
+pygame.quit()
