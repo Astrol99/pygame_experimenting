@@ -15,8 +15,10 @@ width = 40
 height = 60 
 
 vel = 5     # Velocity of object moving
+isJump = False  # Condition of character of jumping action
+jumpCount = 10
 
-run = True
+run = True  # Condition of program running or not
 while run:
     pygame.time.delay(50) # Make things run a bit slower so it doesn't run too fast (in miliseconds)
 
@@ -33,10 +35,23 @@ while run:
         x -= vel
     if keys[pygame.K_RIGHT] and x < resolution[0] - width - vel:
         x += vel
-    if keys[pygame.K_UP] and y > vel:
-        y -= vel
-    if keys[pygame.K_DOWN] and y < resolution[1] - height - vel:
-        y += vel
+    if not isJump:
+        if keys[pygame.K_UP] and y > vel:
+            y -= vel
+        if keys[pygame.K_DOWN] and y < resolution[1] - height - vel:
+            y += vel
+        if keys[pygame.K_SPACE]:
+            isJump = True
+    else:
+        if jumpCount >= -10:
+            neg = 1
+            if jumpCount < 0:
+                neg = -1
+            y -= (jumpCount ** 2)*0.5*neg
+            jumpCount -= 1
+        else:
+            isJump = False
+            jumpCount = 10
 
     win.fill((0,0,0))   # Fill screen before drawing another one to not create a mess
     pygame.draw.rect(win, (0, 255, 100), (x, y, width, height))  # Creates the rectangle shape on window surface
