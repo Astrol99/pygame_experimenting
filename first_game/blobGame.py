@@ -1,7 +1,9 @@
 import pygame
 pygame.init()   # Function that starts lib
 
-win = pygame.display.set_mode((500,500))    # Window resolution
+resolution = [500,500]  # Resolution of screen 
+
+win = pygame.display.set_mode((resolution[0],resolution[1]))    # Set window resolution
 pygame.display.set_caption("Blob Game")     # Set title of game window (top left)
 
 # Positions of object
@@ -16,7 +18,7 @@ vel = 5     # Velocity of object moving
 
 run = True
 while run:
-    pygame.time.delay(100) # Make things run a bit slower so it doesn't run too fast (in miliseconds)
+    pygame.time.delay(50) # Make things run a bit slower so it doesn't run too fast (in miliseconds)
 
     # Gets all event that pygame gets from user
     for event in pygame.event.get(): 
@@ -27,13 +29,13 @@ while run:
     keys = pygame.key.get_pressed()     # Gets all keys pressed and stores it into a list
 
     # If these key arrows are moved, update position of object
-    if keys[pygame.K_LEFT]:
+    if keys[pygame.K_LEFT] and x > vel: # Restrictions for shape so it doesn't get over window 
         x -= vel
-    if keys[pygame.K_RIGHT]:
+    if keys[pygame.K_RIGHT] and x < resolution[0] - width - vel:
         x += vel
-    if keys[pygame.K_UP]:
+    if keys[pygame.K_UP] and y > vel:
         y -= vel
-    if keys[pygame.K_DOWN]:
+    if keys[pygame.K_DOWN] and y < resolution[1] - height - vel:
         y += vel
 
     win.fill((0,0,0))   # Fill screen before drawing another one to not create a mess
