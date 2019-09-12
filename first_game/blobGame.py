@@ -23,4 +23,8 @@ while run:
         if event.type == pygame.QUIT:   # If user clicks on exit button (top right of window), makes run
             run = False                 # false and stops loop, eventually running pygame.quit() which is outside of loop
 
-pygame.quit()
+                    
+    pygame.draw.rect(win, (255, 0, 0), (x, y, width, height))  # Creates the rectangle shape on window surface
+    pygame.display.update()     # Updates window to put shape on window
+
+pygame.quit()   # Closes window and exits program
