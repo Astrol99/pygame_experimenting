@@ -22,9 +22,22 @@ while run:
     for event in pygame.event.get(): 
         if event.type == pygame.QUIT:   # If user clicks on exit button (top right of window), makes run
             run = False                 # false and stops loop, eventually running pygame.quit() which is outside of loop
+    
 
-                    
-    pygame.draw.rect(win, (255, 0, 0), (x, y, width, height))  # Creates the rectangle shape on window surface
+    keys = pygame.key.get_pressed()     # Gets all keys pressed and stores it into a list
+
+    # If these key arrows are moved, update position of object
+    if keys[pygame.K_LEFT]:
+        x -= vel
+    if keys[pygame.K_RIGHT]:
+        x += vel
+    if keys[pygame.K_UP]:
+        y -= vel
+    if keys[pygame.K_DOWN]:
+        y += vel
+
+    win.fill((0,0,0))   # Fill screen before drawing another one to not create a mess
+    pygame.draw.rect(win, (0, 255, 100), (x, y, width, height))  # Creates the rectangle shape on window surface
     pygame.display.update()     # Updates window to put shape on window
 
 pygame.quit()   # Closes window and exits program
